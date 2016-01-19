@@ -5,6 +5,7 @@ using System;
 public class PlayerMotor : BaseMotor
 {
     CameraMotor camMotor;
+    Transform camTransform;
 
     protected override void Start()
     {
@@ -12,12 +13,16 @@ public class PlayerMotor : BaseMotor
 
         camMotor = gameObject.AddComponent<CameraMotor>();
         camMotor.Init();
+        camTransform = camMotor.CameraContainer;
     }
 
     protected override void UpdateMotor()
     {
         // Get the input
         MoveVector = InputDirection();
+
+        // Rotate out MoveVector with Camera's forward
+        MoveVector = RotateWithView(MoveVector);
 
         // Send the input to a filter
         MoveVector = state.ProcessMotion(MoveVector);
@@ -42,5 +47,12 @@ public class PlayerMotor : BaseMotor
             dir.Normalize();
 
         return dir;
+    }
+
+    Vector3 RotateWithView(Vector3 input)
+    {
+        Vector3 dir = camTransform.TransformDirection(input);
+        dir.Set(dir.x, 0, dir.z); // no movement in y
+        return dir.normalized * input.magnitude;
     }
 }
