@@ -49,7 +49,8 @@ public abstract class BaseMotor : MonoBehaviour
         state.Construct();
     }
 
-    public virtual bool CheckGrounded()
+    // CheckGrounded
+    public virtual bool Grounded()
     {
         RaycastHit hit;
         Vector3 ray;

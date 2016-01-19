@@ -4,6 +4,16 @@ using System;
 
 public class PlayerMotor : BaseMotor
 {
+    CameraMotor camMotor;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        camMotor = gameObject.AddComponent<CameraMotor>();
+        camMotor.Init();
+    }
+
     protected override void UpdateMotor()
     {
         // Get the input
@@ -13,12 +23,12 @@ public class PlayerMotor : BaseMotor
         MoveVector = state.ProcessMotion(MoveVector);
 
         // Check if we need to change current state
-        state.HandleTransition();
+        state.Transition();
 
         // Move
         Move();
 
-        CheckGrounded();
+        Grounded();
     }
 
     Vector3 InputDirection()

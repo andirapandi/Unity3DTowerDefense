@@ -17,7 +17,8 @@ public abstract class BaseState : MonoBehaviour
         Destroy(this);
     }
 
-    public virtual void HandleTransition()
+    // HandleTransition
+    public virtual void Transition()
     {
 
     }

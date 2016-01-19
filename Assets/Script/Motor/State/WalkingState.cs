@@ -16,9 +16,9 @@ public class WalkingState : BaseState
         return input;
     }
 
-    public override void HandleTransition()
+    public override void Transition()
     {
-        if (!motor.CheckGrounded())
+        if (!motor.Grounded())
             motor.ChangeState("FallingState");
     }
 }
