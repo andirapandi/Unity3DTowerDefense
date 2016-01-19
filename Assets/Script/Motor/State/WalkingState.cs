@@ -16,6 +16,12 @@ public class WalkingState : BaseState
         return input;
     }
 
+    public override Quaternion ProcessRotation(Vector3 input)
+    {
+        return Quaternion.FromToRotation(Vector3.forward, input);
+        //base.ProcessRotation(input);
+    }
+
     public override void Transition()
     {
         if (!motor.Grounded())

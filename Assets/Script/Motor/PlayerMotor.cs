@@ -26,6 +26,7 @@ public class PlayerMotor : BaseMotor
 
         // Send the input to a filter
         MoveVector = state.ProcessMotion(MoveVector);
+        RotationQuaternion = state.ProcessRotation(MoveVector);
 
         // Check if we need to change current state
         state.Transition();

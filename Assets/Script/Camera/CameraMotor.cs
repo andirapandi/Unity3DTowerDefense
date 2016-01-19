@@ -19,8 +19,10 @@ public class CameraMotor : MonoBehaviour
     {
         var dir = Vector3.zero;
 
-        dir.x = Input.GetAxis("Horizontal");
-        dir.z = Input.GetAxis("Vertical");
+        // get values from newly created inputs, mapped to mouse right now
+        dir.x = Input.GetAxis("Horizontal2");
+        //dir.x = Input.GetAxis("Mouse X");
+        dir.z = -Input.GetAxis("Vertical2");
 
         if (dir.magnitude > 1)
             dir.Normalize();
