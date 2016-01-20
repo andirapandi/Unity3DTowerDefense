@@ -11,7 +11,7 @@ public class CameraMotor : MonoBehaviour
     {
         CameraContainer = new GameObject("Camera Container").transform;
         CameraContainer.gameObject.AddComponent<Camera>();
-        state = gameObject.AddComponent<FirstPersonCamera>() as BaseCameraState;
+        state = gameObject.AddComponent<ThirdPersonCamera>() as BaseCameraState;
         state.Construct();
     }
 
