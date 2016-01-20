@@ -11,6 +11,9 @@ public class PlayerMotor : BaseMotor
     {
         base.Start();
 
+        state = gameObject.AddComponent<WalkingState>();
+        state.Construct();
+
         camMotor = gameObject.AddComponent<CameraMotor>();
         camMotor.Init();
         camTransform = camMotor.CameraContainer;

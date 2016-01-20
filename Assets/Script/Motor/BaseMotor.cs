@@ -27,8 +27,6 @@ public abstract class BaseMotor : MonoBehaviour
     {
         controller = gameObject.AddComponent<CharacterController>();
         thisTransform = transform;
-        state = gameObject.AddComponent<WalkingState>();
-        state.Construct();
     }
 
     private void Update()

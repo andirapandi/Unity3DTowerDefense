@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 490578}
   - 33: {fileID: 3328268}
   - 23: {fileID: 2313472}
+  - 114: {fileID: 11441820}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -62,6 +63,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 186480}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11441820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c32ac32f72fbc4fae2193e8b04cb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
