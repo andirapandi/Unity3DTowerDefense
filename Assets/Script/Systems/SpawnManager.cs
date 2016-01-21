@@ -2,9 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
+public class SpawnPoint
+{
+    public Transform self;
+    public Transform destination;
+}
+
 public class SpawnManager : MonoSingleton<SpawnManager>
 {
-    public List<Transform> spawnPoint = new List<Transform>();
+    public List<SpawnPoint> spawnPoint = new List<SpawnPoint>();
     public List<GameObject> spawnPrefabs = new List<GameObject>();
 
     public void Spawn(int spawnPrefabIndex)
@@ -14,7 +21,8 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
     public void Spawn(int spawnPrefabIndex, int spawnPointIndex)
     {
-        Instantiate(spawnPrefabs[spawnPrefabIndex], spawnPoint[spawnPointIndex].position, spawnPoint[spawnPointIndex].rotation);
+        GameObject go = Instantiate(spawnPrefabs[spawnPrefabIndex], spawnPoint[spawnPointIndex].self.position, spawnPoint[spawnPointIndex].self.rotation) as GameObject;
+        go.SendMessage("SetDestination", spawnPoint[spawnPointIndex].destination);
     }
 
     // Temporary

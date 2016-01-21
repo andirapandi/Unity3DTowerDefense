@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AIMotor : BaseMotor
 {
+    Vector3 destination = Vector3.zero;
     protected override void Start()
     {
         base.Start();
@@ -28,8 +29,17 @@ public class AIMotor : BaseMotor
         Grounded();
     }
 
+    public void SetDestination(Transform t)
+    {
+        destination = t.position;
+    }
+
     public Vector3 Direction()
     {
-        return Vector3.zero;
+        if (destination == Vector3.zero)
+            return Vector3.zero;
+        Vector3 dir = destination - thisTransform.position;
+        dir.Set(dir.x, 0, dir.z);
+        return dir.normalized;
     }
 }
