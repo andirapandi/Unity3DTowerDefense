@@ -26,12 +26,14 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         GameObject go = Instantiate(spawnPrefabs[spawnPrefabIndex], spawnPoint[spawnPointIndex].self.position, spawnPoint[spawnPointIndex].self.rotation) as GameObject;
         go.SendMessage("SetDestination", spawnPoint[spawnPointIndex].destination);
         activeEnemies.Add(go);
+        UIManager.Instance.DrawWaveInfo();
     }
 
     public void DestroyEnemy(GameObject go)
     {
         activeEnemies.Remove(go);
         Destroy(go);
+        UIManager.Instance.DrawWaveInfo();
     }
 
     public int GetEnemiesLeft()

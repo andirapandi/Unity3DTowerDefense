@@ -5,6 +5,12 @@ using System.Collections.Generic;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     int lifePoint = 10;
+    int currentWave;
+    /// <summary>
+    /// total waves
+    /// amount of waves?!
+    /// </summary>
+    int ammWave;
     bool spawnActive = false;
     bool waveActive = false;
     List<Wave> waves = new List<Wave>();
@@ -13,6 +19,18 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         foreach (var w in GetComponents<Wave>())
             waves.Add(w);
+
+        currentWave = 0;
+        ammWave = waves.Count;
+
+        // this might cause random problems when UIManager is not instantiated yet
+        //UIManager.Instance.DrawWaveInfo();
+    }
+
+    void Start()
+    {
+        // Start called after Initialize
+        UIManager.Instance.DrawWaveInfo();
     }
 
     void Update()
@@ -42,10 +60,12 @@ public class LevelManager : MonoSingleton<LevelManager>
             return;
         }
         else {
+            currentWave++;
             Debug.Log("Wave is starting");
             waves[0].StartWave();
             spawnActive = true;
             waveActive = true;
+            UIManager.Instance.DrawWaveInfo();
         }
     }
 
@@ -62,6 +82,11 @@ public class LevelManager : MonoSingleton<LevelManager>
         lifePoint--;
         if (lifePoint == 0)
             Defeat();
+    }
+
+    public string GetWaveInfo()
+    {
+        return currentWave + " / " + ammWave;
     }
 
     void Victory()
