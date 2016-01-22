@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BaseSpell : MonoBehaviour
 {
     protected float cooldown;
     protected float lastCast;
+
+    public Button SpellButton { get; set; }
 
     public virtual void Cast()
     {
