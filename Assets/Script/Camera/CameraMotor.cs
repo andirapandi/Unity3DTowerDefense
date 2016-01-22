@@ -3,10 +3,13 @@ using System.Collections;
 
 public class CameraMotor : MonoBehaviour
 {
-
+    #region Fields
     BaseCameraState state;
     public Transform CameraContainer { set; get; }
     public Vector3 InputVector { get; set; }
+    #endregion
+
+    #region Init & Update
     public void Init()
     {
         CameraContainer = new GameObject("Camera Container").transform;
@@ -35,7 +38,9 @@ public class CameraMotor : MonoBehaviour
         CameraContainer.position = state.ProcessMotion(InputVector);
         CameraContainer.rotation = state.ProcessRotation(InputVector);
     }
+    #endregion
 
+    #region Functions
     public void ChangeState(string stateName)
     {
         System.Type t = System.Type.GetType(stateName);
@@ -44,4 +49,5 @@ public class CameraMotor : MonoBehaviour
         state = gameObject.AddComponent(t) as BaseCameraState;
         state.Construct();
     }
+    #endregion
 }

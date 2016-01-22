@@ -5,6 +5,7 @@ public abstract class BaseCameraState : MonoBehaviour
 {
     protected CameraMotor motor;
 
+    #region BaseState implementation
     public virtual void Construct()
     {
         motor = GetComponent<CameraMotor>();
@@ -25,7 +26,9 @@ public abstract class BaseCameraState : MonoBehaviour
     {
         return transform.rotation;
     }
+    #endregion
 
+    #region functions
     protected float ClampAngle(float angle, float min, float max)
     {
         // avoid loop
@@ -44,4 +47,5 @@ public abstract class BaseCameraState : MonoBehaviour
         //        angle -= 360;
         //} while (angle < 360 || angle > 360);
     }
+    #endregion
 }

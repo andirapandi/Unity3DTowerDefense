@@ -11,11 +11,14 @@ public class SpawnPoint
 
 public class SpawnManager : MonoSingleton<SpawnManager>
 {
+    #region Fields
     public List<SpawnPoint> spawnPoint = new List<SpawnPoint>();
     public List<GameObject> spawnPrefabs = new List<GameObject>();
 
     List<GameObject> activeEnemies = new List<GameObject>();
+    #endregion
 
+    #region Spawn Functions
     public void Spawn(int spawnPrefabIndex)
     {
         Spawn(spawnPrefabIndex, 0);
@@ -35,11 +38,14 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         Destroy(go);
         UIManager.Instance.DrawWaveInfo();
     }
+    #endregion
 
+    #region Functions
     public int GetEnemiesLeft()
     {
         return activeEnemies.Count;
     }
+    #endregion
 
     // Temporary
     int lastLeft = -1;

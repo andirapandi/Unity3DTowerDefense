@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
+    #region Fields
     int lifePoint = 10;
     int currentWave;
     /// <summary>
@@ -14,7 +15,9 @@ public class LevelManager : MonoSingleton<LevelManager>
     bool spawnActive = false;
     bool waveActive = false;
     List<Wave> waves = new List<Wave>();
+    #endregion
 
+    #region Init & Update
     public override void Init()
     {
         foreach (var w in GetComponents<Wave>())
@@ -51,7 +54,9 @@ public class LevelManager : MonoSingleton<LevelManager>
             }
         }
     }
+    #endregion
 
+    #region Wave Functions
     void StartWave()
     {
         if (waves.Count == 0)
@@ -77,16 +82,18 @@ public class LevelManager : MonoSingleton<LevelManager>
         spawnActive = false;
     }
 
+    public string GetWaveInfo()
+    {
+        return currentWave + " / " + ammWave;
+    }
+    #endregion
+
+    #region Functions
     public void EnemyCrossed()
     {
         lifePoint--;
         if (lifePoint == 0)
             Defeat();
-    }
-
-    public string GetWaveInfo()
-    {
-        return currentWave + " / " + ammWave;
     }
 
     void Victory()
@@ -100,4 +107,5 @@ public class LevelManager : MonoSingleton<LevelManager>
         // clean the level
         Debug.Log("Defeat");
     }
+    #endregion
 }

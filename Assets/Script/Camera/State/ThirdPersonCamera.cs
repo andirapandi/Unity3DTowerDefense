@@ -4,9 +4,12 @@ using System;
 
 public class ThirdPersonCamera : BaseCameraState
 {
+    #region Const
     const float Y_ANGLE_MIN = -75f;
     const float Y_ANGLE_MAX = 50f;
+    #endregion
 
+    #region Fields
     Transform lookAt;
     Transform cameraContainer;
 
@@ -16,7 +19,9 @@ public class ThirdPersonCamera : BaseCameraState
     float currentY = 0f;
     float sensitivityX = 4f;
     float sensitivityY = 1f;
+    #endregion
 
+    #region BaseState implementation
     public override void Construct()
     {
         base.Construct();
@@ -41,11 +46,14 @@ public class ThirdPersonCamera : BaseCameraState
         cameraContainer.LookAt(lookAt.position + offset);
         return cameraContainer.rotation;
     }
+    #endregion
 
+    #region Functions
     Vector3 CalculatePosition()
     {
         Vector3 dir = new Vector3(0, 0, -distance);
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
         return (lookAt.position + offset) + rotation * dir;
     }
+    #endregion
 }

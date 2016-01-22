@@ -4,8 +4,12 @@ using System.Collections.Generic;
 
 public class Wave : MonoBehaviour
 {
+    #region Fields
     public List<WaveEvent> events = new List<WaveEvent>();
     bool isPlaying = false;
+    #endregion
+
+    #region Initialize & Update
     public void StartWave()
     {
         isPlaying = true;
@@ -36,15 +40,20 @@ public class Wave : MonoBehaviour
                 events[0].StartEvent();
         }
     }
+    #endregion
+
 
     [System.Serializable]
     public class WaveEvent
     {
+        #region Functions
         public float duration = 15f;
         public List<SpawnInfo> spawnInfos;
 
         float startTime;
+        #endregion
 
+        #region Init & Update
         public void StartEvent()
         {
             startTime = Time.time;
@@ -68,17 +77,21 @@ public class Wave : MonoBehaviour
 
             return true;
         }
+        #endregion
 
         [System.Serializable]
         public class SpawnInfo
         {
+            #region Fields
             public int spawnPointIndex = 0;
             public int spawnPrefabIndex = 0;
             public int amount = 10;
             public float interval = 1f;
 
             float lastTime;
+            #endregion
 
+            #region Functions
             public void ReadyToSpawn()
             {
                 if (Time.time - lastTime >= interval)
@@ -88,6 +101,7 @@ public class Wave : MonoBehaviour
                     lastTime = Time.time;
                 }
             }
+            #endregion
         }
     }
 }

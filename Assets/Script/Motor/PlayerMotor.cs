@@ -4,9 +4,12 @@ using System;
 
 public class PlayerMotor : BaseMotor
 {
+    #region Fields
     CameraMotor camMotor;
     Transform camTransform;
+    #endregion
 
+    #region Init & Update
     protected override void Start()
     {
         base.Start();
@@ -39,7 +42,9 @@ public class PlayerMotor : BaseMotor
 
         Grounded();
     }
+    #endregion
 
+    #region Functions
     Vector3 InputDirection()
     {
         var dir = Vector3.zero;
@@ -59,4 +64,5 @@ public class PlayerMotor : BaseMotor
         dir.Set(dir.x, 0, dir.z); // no movement in y
         return dir.normalized * input.magnitude;
     }
+    #endregion
 }

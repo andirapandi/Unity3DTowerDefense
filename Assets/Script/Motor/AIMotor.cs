@@ -3,7 +3,11 @@ using System.Collections;
 
 public class AIMotor : BaseMotor
 {
+    #region Fields
     Vector3 destination = Vector3.zero;
+    #endregion
+
+    #region Init & Update
     protected override void Start()
     {
         base.Start();
@@ -11,6 +15,7 @@ public class AIMotor : BaseMotor
         state = gameObject.AddComponent<AIWalkingState>();
         state.Construct();
     }
+
     protected override void UpdateMotor()
     {
         // Get the input
@@ -28,7 +33,9 @@ public class AIMotor : BaseMotor
 
         Grounded();
     }
+    #endregion
 
+    #region Functions
     public void SetDestination(Transform t)
     {
         destination = t.position;
@@ -42,4 +49,5 @@ public class AIMotor : BaseMotor
         dir.Set(dir.x, 0, dir.z);
         return dir.normalized;
     }
+    #endregion
 }

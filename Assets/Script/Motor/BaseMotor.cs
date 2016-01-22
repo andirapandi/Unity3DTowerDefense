@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class BaseMotor : MonoBehaviour
 {
-
+    #region Fields
     protected CharacterController controller;
     protected BaseState state;
     protected Transform thisTransform;
@@ -22,9 +22,11 @@ public abstract class BaseMotor : MonoBehaviour
     public float VerticalVelocity { get; set; }
     public Vector3 MoveVector { get; set; }
     public Quaternion RotationQuaternion { get; set; }
+    #endregion
 
     protected abstract void UpdateMotor();
 
+    #region Init & Update
     protected virtual void Start()
     {
         controller = gameObject.AddComponent<CharacterController>();
@@ -35,7 +37,9 @@ public abstract class BaseMotor : MonoBehaviour
     {
         UpdateMotor();
     }
+    #endregion
 
+    #region Functions
     protected virtual void Move()
     {
         controller.Move(MoveVector * Time.deltaTime);
@@ -66,7 +70,6 @@ public abstract class BaseMotor : MonoBehaviour
             centerZ = controller.bounds.center.z - groundRayInnerOffset,
             extentX = controller.bounds.extents.x - groundRayInnerOffset,
             extentZ = controller.bounds.extents.z - groundRayInnerOffset;
-
 
         // Middle Raycast
         ray = new Vector3(centerX, yRay, centerZ);
@@ -102,4 +105,5 @@ public abstract class BaseMotor : MonoBehaviour
 
         return false;
     }
+    #endregion
 }
