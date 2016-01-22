@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 479822}
   - 114: {fileID: 11471006}
+  - 114: {fileID: 11470506}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -28,6 +29,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11470506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a30cbe9bbc0394fb8d398ed6522bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events: []
 --- !u!114 &11471006
 MonoBehaviour:
   m_ObjectHideFlags: 1

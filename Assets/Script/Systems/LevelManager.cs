@@ -18,4 +18,11 @@ public class LevelManager : MonoSingleton<LevelManager>
         // clean the level
         Debug.Log("Defeat");
     }
+
+    void Update()
+    {
+        // temp test
+        if (Input.GetKeyDown(KeyCode.K))
+            GetComponent<Wave>().StartWave();
+    }
 }
