@@ -13,8 +13,8 @@ public class Wave : MonoBehaviour
             events[0].StartEvent();
         else
         {
-            Debug.Log("End Wave in StartWave");
-            Destroy(this);
+            LevelManager.Instance.EndWave();
+            //Debug.Log("End Wave in StartWave");
         }
     }
 
@@ -29,8 +29,8 @@ public class Wave : MonoBehaviour
             events.RemoveAt(0);
             if (events.Count == 0)
             {
-                Debug.Log("End Wave");
-                Destroy(this);
+                LevelManager.Instance.EndWave();
+                //Debug.Log("End Wave");
             }
             else
                 events[0].StartEvent();
@@ -63,7 +63,7 @@ public class Wave : MonoBehaviour
             {
                 spawnInfos[i].ReadyToSpawn();
                 if (spawnInfos[i].amount == 0)
-                    spawnInfos.RemoveAt(0);
+                    spawnInfos.RemoveAt(i);
             }
 
             return true;

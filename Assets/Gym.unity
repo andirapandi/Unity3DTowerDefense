@@ -94,11 +94,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
       propertyPath: events.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
       propertyPath: events.Array.data[0].spawnInfos.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
       propertyPath: events.Array.data[1].spawnInfos.Array.size
@@ -146,11 +146,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
       propertyPath: events.Array.data[0].spawnInfos.Array.data[0].spawnPointIndex
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
       propertyPath: events.Array.data[0].spawnInfos.Array.data[1].spawnPointIndex
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
       propertyPath: events.Array.data[0].spawnInfos.Array.data[0].amount
@@ -211,6 +211,18 @@ Prefab:
     - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
       propertyPath: events.Array.data[2].spawnInfos.Array.data[2].interval
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
+      propertyPath: events.Array.data[0].spawnInfos.Array.data[2].spawnPointIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
+      propertyPath: events.Array.data[0].spawnInfos.Array.data[2].amount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11470506, guid: 744397420068a6349a73435e9404259c, type: 2}
+      propertyPath: events.Array.data[0].spawnInfos.Array.data[2].interval
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 744397420068a6349a73435e9404259c, type: 2}
@@ -659,6 +671,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1 &1462788156 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 191170, guid: 744397420068a6349a73435e9404259c, type: 2}
+  m_PrefabInternal: {fileID: 134438551}
+--- !u!114 &1462788160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1462788156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a30cbe9bbc0394fb8d398ed6522bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - duration: 0
+    spawnInfos:
+    - spawnPointIndex: 0
+      spawnPrefabIndex: 1
+      amount: 3
+      interval: 2.5
+    - spawnPointIndex: 1
+      spawnPrefabIndex: 1
+      amount: 1
+      interval: 0
+    - spawnPointIndex: 2
+      spawnPrefabIndex: 1
+      amount: 1
+      interval: 0
 --- !u!1001 &1542456389
 Prefab:
   m_ObjectHideFlags: 0
