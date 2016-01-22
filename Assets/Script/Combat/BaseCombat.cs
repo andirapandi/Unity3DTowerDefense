@@ -17,6 +17,8 @@ public class BaseCombat : MonoBehaviour
     //public int Hitpoint { get; set; } = 10;
 
     void Start()
+    //void Awake()
+    //void OnEnable()
     {
         InitCombat();
     }
