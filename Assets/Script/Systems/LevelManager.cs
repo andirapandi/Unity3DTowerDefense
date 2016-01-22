@@ -17,11 +17,12 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     void Update()
     {
-       if (!waveActive)
+        if (!waveActive)
         {
             if (Input.GetKeyDown(KeyCode.K))
                 StartWave();
-        } else
+        }
+        else
         {
             if (!spawnActive && !GameObject.FindGameObjectWithTag("Enemy"))
             {
@@ -35,10 +36,17 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     void StartWave()
     {
-        Debug.Log("Wave is starting");
-        waves[0].StartWave();
-        spawnActive = true;
-        waveActive = true;
+        if (waves.Count == 0)
+        {
+            Debug.Log("Problem, no more waves!");
+            return;
+        }
+        else {
+            Debug.Log("Wave is starting");
+            waves[0].StartWave();
+            spawnActive = true;
+            waveActive = true;
+        }
     }
 
     public void EndWave()
