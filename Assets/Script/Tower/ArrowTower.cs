@@ -22,6 +22,6 @@ public class ArrowTower : BaseTower
         //target.SendMessage("OnDamage", dmg);
 
         var arrow = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
-        arrow.GetComponent<BaseProjectile>().Launch(target.position, dmg);
+        arrow.GetComponent<BaseProjectile>().Launch(transform, target, dmg);
     }
 }

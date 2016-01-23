@@ -1,40 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BaseProjectile : MonoBehaviour
 {
+    public Transform Tower { set; get; }
+    public Transform Target { set; get; }
     public Vector3 TargetLocation { get; set; }
     public DamageInfo Damage { get; set; }
 
-    public Transform LockOn { get; set; }
+    //public Transform LockOn { get; set; }
     public bool IsLockedOnTarget { get; set; }
-    public float ProjectileSpeed { get; set; }
+    public float TimeToTarget { get; set; }
 
+    float transition = 0f;
     bool isLaunched = false;
 
     public BaseProjectile()
     {
-        LockOn = null;
         IsLockedOnTarget = false;
-        ProjectileSpeed = 5f;
+        TimeToTarget = 5f;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (!isLaunched)
             return;
-        if (IsLockedOnTarget && LockOn)
+
+        transition += Time.deltaTime / TimeToTarget;
+
+        if (transition >= 1f)
+            ReachTarget();
+
+        if (IsLockedOnTarget && Target)
         {
-            TargetLocation = LockOn.position;
+            TargetLocation = Target.position;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, TargetLocation, ProjectileSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(Tower.position, TargetLocation, transition); // Vector3.MoveTowards(transform.position, TargetLocation, ProjectileSpeed * Time.deltaTime);
     }
 
-    public virtual void Launch(Vector3 targetLocation, DamageInfo dmg)
+    protected virtual void ReachTarget()
+    {
+        if (Target)
+            Target.SendMessage("OnDamage", Damage);
+        Destroy(gameObject);
+    }
+
+    public virtual void Launch(Transform tower, Transform target, DamageInfo dmg)
     {
         isLaunched = true;
-        TargetLocation = targetLocation;
+        Tower = tower;
+        Target = target;
+        TargetLocation = target.position;
         Damage = dmg;
     }
 }
