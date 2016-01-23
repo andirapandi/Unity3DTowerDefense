@@ -17,8 +17,8 @@ public class ThirdPersonCamera : BaseCameraState
     float distance = 10.0f;
     float currentX = 0f;
     float currentY = 0f;
-    float sensitivityX = 4f;
-    float sensitivityY = 1f;
+    float sensitivityX = 8f; // 4f;
+    float sensitivityY = 3f; //1f;
     #endregion
 
     #region BaseState implementation
@@ -32,8 +32,11 @@ public class ThirdPersonCamera : BaseCameraState
 
     public override Vector3 ProcessMotion(Vector3 input)
     {
-        currentX += input.x * sensitivityX;
-        currentY += input.z * sensitivityY;
+        if (Input.GetMouseButton(1))
+        {
+            currentX += input.x * sensitivityX;
+            currentY += input.z * sensitivityY;
+        }
 
         // Clamp my CurrentY
         currentY = ClampAngle(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
