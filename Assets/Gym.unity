@@ -316,6 +316,7 @@ GameObject:
   - 114: {fileID: 415727620}
   - 114: {fileID: 415727619}
   - 223: {fileID: 415727622}
+  - 114: {fileID: 415727623}
   m_Layer: 5
   m_Name: SpellButtonsContainer
   m_TagString: Untagged
@@ -411,6 +412,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &415727623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 415727617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &575401840 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 119468, guid: a89d4b421cc8471489f03f3a41366d26, type: 2}

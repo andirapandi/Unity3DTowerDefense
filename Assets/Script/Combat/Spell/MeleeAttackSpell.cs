@@ -10,7 +10,7 @@ public class MeleeAttackSpell : BaseSpell
     public MeleeAttackSpell()
     {
         cooldown = 0.5f;
-        lastCast = 0; // should be the same for initialization and allowing first cast straight away - and throws no exception Time.time - cooldown;
+        lastCast = float.MinValue; // 0; // should be the same for initialization and allowing first cast straight away - and throws no exception Time.time - cooldown;
         hitLength = 3f;
         hitOrigin = transform;
         targetMask = LayerMask.GetMask("Enemy");
