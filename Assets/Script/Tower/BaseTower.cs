@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class BaseTower : MonoBehaviour
+public abstract class BaseTower : MonoBehaviour
 {
     protected float lastTick;
     protected float refreshRate = 0.1f;
@@ -55,7 +55,7 @@ public class BaseTower : MonoBehaviour
         return null;
     }
 
-    private void Action(Transform target)
+    protected virtual void Action(Transform target)
     {
         lastAction = Time.time;
         Debug.Log(gameObject.name + " is shooting at " + target.name);
