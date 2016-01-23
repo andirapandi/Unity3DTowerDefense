@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ArrowTower : BaseTower
 {
+    public GameObject projectile;
+
     public ArrowTower()
     {
         range = 7.5f;
@@ -18,5 +20,8 @@ public class ArrowTower : BaseTower
         dmg.amount = 5;
 
         //target.SendMessage("OnDamage", dmg);
+
+        var arrow = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+        arrow.GetComponent<BaseProjectile>().Launch(target.position, dmg);
     }
 }

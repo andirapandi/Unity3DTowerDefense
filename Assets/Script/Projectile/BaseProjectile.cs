@@ -31,4 +31,10 @@ public class BaseProjectile : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, TargetLocation, ProjectileSpeed * Time.deltaTime);
     }
 
+    public virtual void Launch(Vector3 targetLocation, DamageInfo dmg)
+    {
+        isLaunched = true;
+        TargetLocation = targetLocation;
+        Damage = dmg;
+    }
 }
