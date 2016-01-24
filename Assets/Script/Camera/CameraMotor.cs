@@ -14,6 +14,7 @@ public class CameraMotor : MonoBehaviour
     {
         CameraContainer = new GameObject("Camera Container").transform;
         CameraContainer.gameObject.AddComponent<Camera>();
+        CameraContainer.tag = "MainCamera"; // special tag to denote main camera in scene
         state = gameObject.AddComponent<ThirdPersonCamera>() as BaseCameraState;
         state.Construct();
     }

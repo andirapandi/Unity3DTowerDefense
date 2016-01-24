@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 479822}
   - 114: {fileID: 11471006}
   - 114: {fileID: 11470506}
+  - 114: {fileID: 11453404}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -29,6 +30,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11453404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16229a471aa9b774ca36654ccfe92b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefabs:
+  - {fileID: 104478, guid: e76114c2092b1b64cab9982dd25d9799, type: 2}
 --- !u!114 &11470506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,7 +72,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: towerPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: towerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 104478, guid: e76114c2092b1b64cab9982dd25d9799, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 191170}
