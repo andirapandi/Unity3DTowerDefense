@@ -42,10 +42,15 @@ public class BuildMode : MonoBehaviour
             return;
         }
         Vector3 previewPosition = playerTransform.position;
-        previewPosition += (playerTransform.position - cameraTransform.position).normalized * PREVIEW_DISTANCE_FROM_PLAYER;
+        #region make tower always have same distance from player - independent of angle
+        var tempVector = (playerTransform.position - cameraTransform.position);
+        tempVector.y = 0;
+        #endregion
+        previewPosition += tempVector.normalized * PREVIEW_DISTANCE_FROM_PLAYER;
         RaycastHit hit;
         if (Physics.Raycast(previewPosition + Vector3.up * 5, Vector3.down, out hit, 10, LayerMask.GetMask("Ground")))
             previewPosition.y = hit.point.y + 1;
+        //actually, we would really have to create 4 raycasts - and also check for collisions :) perhaps make tower object red
 
         spawnPreview.transform.position = previewPosition;
     }
