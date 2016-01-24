@@ -6,14 +6,21 @@ using System.Linq;
 
 public class TowerInfo
 {
+    public GameObject TowerObject { get; set; }
+    public BaseTower Tower { set; get; }
     public Vector3 Position { get; set; }
     public bool IsOccupied { set; get; }
 }
 
 public class BuildMode : MonoBehaviour
 {
+    const float PREVIEW_DISTANCE_FROM_PLAYER = 3;
+    const float SPAWN_PREVIEW_SNAP_SPHERE_RADIUS = 2;
+
     public List<GameObject> towerPrefabs;
 
+    int selectedTowerIndex = 0;
+    TowerInfo focusedTowerSpawn;
     List<TowerInfo> towerSpawns;
     Transform playerTransform;
     Transform cameraTransform;
@@ -21,9 +28,6 @@ public class BuildMode : MonoBehaviour
 
     bool isActive = false;
 
-    const float PREVIEW_DISTANCE_FROM_PLAYER = 3;
-
-    const float SPAWN_PREVIEW_SNAP_SPHERE_RADIUS = 2;
 
     void Start()
     {
@@ -33,10 +37,7 @@ public class BuildMode : MonoBehaviour
         {
             towerSpawns.Add(new TowerInfo { Position = go.transform.position, IsOccupied = false });
         }
-        // Create the Tower Preview (spawnPreview)
-        spawnPreview = Instantiate(towerPrefabs[0]) as GameObject;
-        //spawnPreview.active = false; // obsolete warning
-        spawnPreview.SetActive(false);
+        OnSelectionChanged();
     }
 
     void Update()
@@ -47,6 +48,33 @@ public class BuildMode : MonoBehaviour
             return;
 
         MoveSpawnPreview();
+    }
+
+    void SpawnTower()
+    {
+        if (focusedTowerSpawn == null)
+            return;
+        if (focusedTowerSpawn.IsOccupied == true)
+            return;
+
+        // If enough Mana/Resources (check later)
+
+        // temp fix: + Vector3.up (use proper pivot point later on)
+        focusedTowerSpawn.TowerObject = Instantiate(towerPrefabs[selectedTowerIndex], focusedTowerSpawn.Position + Vector3.up, Quaternion.identity) as GameObject;
+        focusedTowerSpawn.Tower = focusedTowerSpawn.TowerObject.GetComponent<BaseTower>();
+        focusedTowerSpawn.IsOccupied = true;
+    }
+
+    private void OnSelectionChanged()
+    {
+        if (spawnPreview != null)
+            Destroy(spawnPreview);
+        // Create the Tower Preview (spawnPreview)
+        spawnPreview = Instantiate(towerPrefabs[selectedTowerIndex]) as GameObject;
+        spawnPreview.GetComponent<BaseTower>().enabled = false;
+        spawnPreview.GetComponent<Collider>().enabled = false;
+        //spawnPreview.active = false; // obsolete warning
+        spawnPreview.SetActive(false);
     }
 
     private void MoveSpawnPreview()
@@ -71,7 +99,7 @@ public class BuildMode : MonoBehaviour
         var towerSpawnColliders = Physics.OverlapSphere(previewPosition, SPAWN_PREVIEW_SNAP_SPHERE_RADIUS, LayerMask.GetMask("TowerSpawn"));
         if (towerSpawnColliders.Length > 0)
         {
-#if _AWEFIJWAEF_
+#if !_AWEFIJWAEF_
             float closestDistanceSqr = Vector3.SqrMagnitude(previewPosition - towerSpawnColliders[0].transform.position);
             int closestIndex = 0;
             for (int i = 1; i < towerSpawnColliders.Length; ++i)
@@ -83,13 +111,17 @@ public class BuildMode : MonoBehaviour
                     closestIndex = i;
                 }
             }
-            previewPosition = towerSpawns.Find(t => t.Position == towerSpawnColliders[closestIndex].transform.position).Position;
+            focusedTowerSpawn = towerSpawns.Find(t => t.Position == towerSpawnColliders[closestIndex].transform.position);
+            previewPosition = focusedTowerSpawn.Position;
 #else
             // thought this was simpler to write, looks a little crazy now and likely is not faster than original solution
             previewPosition = towerSpawnColliders.Select(tsc => tsc.transform.position).Intersect(towerSpawns.Select(ts => ts.Position))
                 .Select(pos => new { position = pos, distance = Vector3.SqrMagnitude(previewPosition - pos) })
                 .OrderBy(ele => ele.distance).Select(ele => ele.position).First();
 #endif
+        } else
+        {
+            focusedTowerSpawn = null;
         }
 
         // .. temporary fix ...
@@ -100,12 +132,41 @@ public class BuildMode : MonoBehaviour
 
     private void PoolInput()
     {
+        // Activate / Deactivate Build Mode
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (isActive)
                 DisableBuildMode();
             else
                 ActivateBuildMode();
+        }
+        // Change Tower Selection
+        if (isActive)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (selectedTowerIndex > 0)
+                {
+                    selectedTowerIndex--;
+                    OnSelectionChanged();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (selectedTowerIndex < towerPrefabs.Count - 1)
+                {
+                    selectedTowerIndex++;
+                    OnSelectionChanged();
+                }
+            }
+        }
+        // Spawn the tower
+        if (isActive)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                SpawnTower();
+            }
         }
     }
 
