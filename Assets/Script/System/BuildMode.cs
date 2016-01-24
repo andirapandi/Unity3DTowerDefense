@@ -38,6 +38,8 @@ public class BuildMode : MonoBehaviour
             towerSpawns.Add(new TowerInfo { Position = go.transform.position, IsOccupied = false });
         }
         OnSelectionChanged();
+        // fix for preview being displayed already at start of game
+        spawnPreview.SetActive(false);
     }
 
     void Update()
@@ -74,7 +76,6 @@ public class BuildMode : MonoBehaviour
         spawnPreview.GetComponent<BaseTower>().enabled = false;
         spawnPreview.GetComponent<Collider>().enabled = false;
         //spawnPreview.active = false; // obsolete warning
-        //spawnPreview.SetActive(false);
     }
 
     private void MoveSpawnPreview()
@@ -119,7 +120,8 @@ public class BuildMode : MonoBehaviour
                 .Select(pos => new { position = pos, distance = Vector3.SqrMagnitude(previewPosition - pos) })
                 .OrderBy(ele => ele.distance).Select(ele => ele.position).First();
 #endif
-        } else
+        }
+        else
         {
             focusedTowerSpawn = null;
         }
