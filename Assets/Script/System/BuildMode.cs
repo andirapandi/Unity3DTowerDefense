@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class TowerInfo
 {
@@ -70,6 +71,7 @@ public class BuildMode : MonoBehaviour
         var towerSpawnColliders = Physics.OverlapSphere(previewPosition, SPAWN_PREVIEW_SNAP_SPHERE_RADIUS, LayerMask.GetMask("TowerSpawn"));
         if (towerSpawnColliders.Length > 0)
         {
+#if _AWEFIJWAEF_
             float closestDistanceSqr = Vector3.SqrMagnitude(previewPosition - towerSpawnColliders[0].transform.position);
             int closestIndex = 0;
             for (int i = 1; i < towerSpawnColliders.Length; ++i)
@@ -82,6 +84,12 @@ public class BuildMode : MonoBehaviour
                 }
             }
             previewPosition = towerSpawns.Find(t => t.Position == towerSpawnColliders[closestIndex].transform.position).Position;
+#else
+            // thought this was simpler to write, looks a little crazy now and likely is not faster than original solution
+            previewPosition = towerSpawnColliders.Select(tsc => tsc.transform.position).Intersect(towerSpawns.Select(ts => ts.Position))
+                .Select(pos => new { position = pos, distance = Vector3.SqrMagnitude(previewPosition - pos) })
+                .OrderBy(ele => ele.distance).Select(ele => ele.position).First();
+#endif
         }
 
         // .. temporary fix ...
