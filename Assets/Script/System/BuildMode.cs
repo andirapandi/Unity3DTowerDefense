@@ -74,7 +74,7 @@ public class BuildMode : MonoBehaviour
         spawnPreview.GetComponent<BaseTower>().enabled = false;
         spawnPreview.GetComponent<Collider>().enabled = false;
         //spawnPreview.active = false; // obsolete warning
-        spawnPreview.SetActive(false);
+        //spawnPreview.SetActive(false);
     }
 
     private void MoveSpawnPreview()
