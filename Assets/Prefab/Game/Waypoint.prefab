@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2385008}
   - 114: {fileID: 11412542}
   m_Layer: 0
-  m_Name: Waypoint0
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
