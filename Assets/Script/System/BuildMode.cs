@@ -57,7 +57,10 @@ public class BuildMode : MonoBehaviour
         if (focusedTowerSpawn == null)
             return;
         if (focusedTowerSpawn.IsOccupied == true)
+        {
+            UIManager.Instance.ShowGeneralMessage("This tower spawn position is occupied...", Color.red, 2f);
             return;
+        }
 
         // If enough Mana/Resources (check later)
 

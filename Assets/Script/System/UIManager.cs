@@ -18,6 +18,39 @@ public class UIManager : MonoSingleton<UIManager>
         {
             allUI.Add(t.gameObject);
         }
+        generalMessages = new List<GeneralMessage>();
+        foreach (Transform t in generalMessageContainer.transform)
+        {
+            var gm = new GeneralMessage();
+            gm.go = t.gameObject;
+            gm.txt = t.GetComponentInChildren<Text>();
+            #region debugging why GetComponentInChildern<Text> return null - looks like this was a runtime problem, after a crash of unity, the problem was gone
+            //if (gm.txt == null)
+            //    gm.txt = t.GetChild(0).GetComponent<Text>();
+            //Debug.Log("component: " + t.name);
+            //var allComponents = t.GetComponents(typeof(Component));
+            //foreach (var component in allComponents)
+            //{
+            //    Debug.Log(component.name + " " + component.GetType().Name);
+            //}
+            //allComponents = t.GetComponentsInChildren(typeof(Component));
+            //foreach (var component in allComponents)
+            //{
+            //    Debug.Log(component.name + " " + component.GetType().Name);
+            //}
+            //Debug.Log("children: " + t.GetChildCount());
+            //Debug.Log("child name: " + t.GetChild(0).name);
+
+            //var message = t.GetChild(0);
+            //allComponents = message.GetComponents(typeof(Component));
+            //foreach (var component in allComponents)
+            //{
+            //    Debug.Log(component.name + " in message " + component.GetType().Name);
+            //}
+            #endregion
+
+            generalMessages.Add(gm);
+        }
     }
     void Update()
     {
@@ -25,6 +58,9 @@ public class UIManager : MonoSingleton<UIManager>
         {
             ToggleGameMenu();
         }
+
+        foreach (var gm in generalMessages)
+            gm.UpdateGeneralMessage();
     }
     #endregion
 
@@ -86,6 +122,47 @@ public class UIManager : MonoSingleton<UIManager>
         recapInfoText[1].text = texts[0];
         recapInfoText[2].text = texts[1];
         recapInfoText[3].text = texts[2];
+    }
+    #endregion
+
+    #region GeneralMessages
+    public GameObject generalMessageContainer;
+    List<GeneralMessage> generalMessages;
+
+    public void ShowGeneralMessage(string msg, Color color, float duration)
+    {
+        lock (generalMessageContainer)
+        {
+            GeneralMessage gm = generalMessages.Find(m => m.go == generalMessageContainer.transform.GetChild(2).gameObject);
+            gm.txt.text = msg;
+            gm.txt.color = color;
+            gm.duration = duration;
+            gm.lastShown = Time.time;
+            gm.isActive = true;
+            gm.go.SetActive(true);
+            gm.go.transform.SetAsFirstSibling();
+        }
+    }
+
+    class GeneralMessage
+    {
+        public bool isActive = false;
+        public GameObject go;
+        public Text txt;
+        public float duration;
+        public float lastShown;
+
+        public void UpdateGeneralMessage()
+        {
+            if (!isActive)
+                return;
+
+            if (Time.time - lastShown > duration)
+            {
+                isActive = false;
+                go.SetActive(false);
+            }
+        }
     }
     #endregion
 }
