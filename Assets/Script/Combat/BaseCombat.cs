@@ -30,6 +30,7 @@ public class BaseCombat : MonoBehaviour
 
     public virtual void OnDamage(DamageInfo dmg)
     {
+        CombatTextManager.Instance.Show(dmg.amount.ToString(), 40, Color.yellow, transform.position, Vector3.up, 1.5f);
         Hitpoint -= dmg.amount;
 
         if (Hitpoint <= 0)
