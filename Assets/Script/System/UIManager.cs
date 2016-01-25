@@ -13,7 +13,8 @@ public class UIManager : MonoSingleton<UIManager>
     public override void Init()
     {
         waveInfoText = waveInfo.GetComponentsInChildren<Text>();
-        foreach(Transform t in root.transform) // var t does not work here?!!
+        recapInfoText = recapInfo.GetComponentsInChildren<Text>();
+        foreach (Transform t in root.transform) // var t does not work here?!!
         {
             allUI.Add(t.gameObject);
         }
@@ -38,6 +39,7 @@ public class UIManager : MonoSingleton<UIManager>
         {
             go.SetActive(!gameMenuShowing);
         }
+        recapInfo.SetActive(false);
         gameMenuObject.SetActive(gameMenuShowing);
     }
 
@@ -67,6 +69,23 @@ public class UIManager : MonoSingleton<UIManager>
     {
         waveInfoText[0].text = "Current wave: " + LevelManager.Instance.GetWaveInfo();
         waveInfoText[1].text = "Enemies on map: " + SpawnManager.Instance.GetEnemiesLeft();
+    }
+    #endregion
+
+    #region RecapInformation
+    public GameObject recapInfo;
+    private Text[] recapInfoText;
+
+    public void PopRecapInfo(bool victory, string[] texts)
+    {
+        foreach (var go in allUI)
+            go.SetActive(false);
+        recapInfo.SetActive(true);
+
+        recapInfoText[0].text = victory ? "Victory!" : "Defeat!";
+        recapInfoText[1].text = texts[0];
+        recapInfoText[2].text = texts[1];
+        recapInfoText[3].text = texts[2];
     }
     #endregion
 }

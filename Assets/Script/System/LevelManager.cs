@@ -99,6 +99,13 @@ public class LevelManager : MonoSingleton<LevelManager>
     void Victory()
     {
         Debug.Log("Level is cleared");
+
+        string[] texts = new string[3];
+        texts[0] = "Total Damage: x";
+        texts[1] = "Towers built: x";
+        texts[2] = "Good Job!";
+
+        UIManager.Instance.PopRecapInfo(true, texts);
     }
 
     void Defeat()
@@ -106,6 +113,13 @@ public class LevelManager : MonoSingleton<LevelManager>
         // Wipe all the enemies
         // clean the level
         Debug.Log("Defeat");
+
+        string[] texts = new string[3];
+        texts[0] = "Total Damage: x";
+        texts[1] = "Towers built: x";
+        texts[2] = "Try again!";
+
+        UIManager.Instance.PopRecapInfo(false, texts);
     }
     #endregion
 }
