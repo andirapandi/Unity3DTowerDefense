@@ -49,7 +49,8 @@ public class UIManager : MonoSingleton<UIManager>
 
     public void ReturnToHUB()
     {
-        Application.LoadLevel("HUB");
+        //Application.LoadLevel("HUB");
+        SceneManager.LoadScene("Hub");
     }
 
     public void ExitToDesktop()

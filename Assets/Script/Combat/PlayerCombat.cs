@@ -45,24 +45,27 @@ public class PlayerCombat : BaseCombat
         System.Type t = System.Type.GetType(spellName);
         BaseSpell spell = gameObject.AddComponent(t) as BaseSpell;
         //var button = Instantiate(spellButtonPrefab);
-        spell.SpellButton = Instantiate(spellButtonPrefab).GetComponent<Button>();
-        spell.SpellButton.onClick.AddListener
-            (() =>
-            {
-                // this part actually never got called, since somehow (????) I lost my "GraphicsRaycaster" on the
-                // spellbuttoncontainer container - see http://answers.unity3d.com/questions/889908/i-created-an-ui-button-but-click-does-not-work.html
-                //Debug.Log("Cast.");
-                spell.Cast();
-            }
-            );
-        //spell.SpellButton.onClick.AddListener(delegate { spell.Cast(); });
-        spell.SpellButton.transform.SetParent(spellButtonContainer.transform);
-        // added, this gives buttons nice size, as per parent
-        spell.SpellButton.transform.localScale = spell.SpellButton.transform.parent.localScale;
-        //spellButtonContainer.
-        //button.transform.SetParent(spellButtonContainer.transform);
+        if (spellButtonContainer != null) // null exception only happens during scene change?!
+        {
+            spell.SpellButton = Instantiate(spellButtonPrefab).GetComponent<Button>();
+            spell.SpellButton.onClick.AddListener
+                (() =>
+                {
+                    // this part actually never got called, since somehow (????) I lost my "GraphicsRaycaster" on the
+                    // spellbuttoncontainer container - see http://answers.unity3d.com/questions/889908/i-created-an-ui-button-but-click-does-not-work.html
+                    //Debug.Log("Cast.");
+                    spell.Cast();
+                }
+                );
+            //spell.SpellButton.onClick.AddListener(delegate { spell.Cast(); });
+            spell.SpellButton.transform.SetParent(spellButtonContainer.transform);
+            // added, this gives buttons nice size, as per parent
+            spell.SpellButton.transform.localScale = spell.SpellButton.transform.parent.localScale;
+            //spellButtonContainer.
+            //button.transform.SetParent(spellButtonContainer.transform);
+            //spellBook.Add(gameObject.AddComponent<MeleeAttackSpell>() /* as BaseSpell */);
+        }
         spellBook.Add(spell);
-        //spellBook.Add(gameObject.AddComponent<MeleeAttackSpell>() /* as BaseSpell */);
     }
 
     //public void Log()
