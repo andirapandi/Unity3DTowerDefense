@@ -19,6 +19,7 @@ public class BuildMode : MonoBehaviour
 
     public List<GameObject> towerPrefabs;
 
+    int resource = 200;
     int selectedTowerIndex = 0;
     TowerInfo focusedTowerSpawn;
     List<TowerInfo> towerSpawns;
@@ -40,6 +41,8 @@ public class BuildMode : MonoBehaviour
         OnSelectionChanged();
         // fix for preview being displayed already at start of game
         spawnPreview.SetActive(false);
+
+        UIManager.Instance.DrawBuildResource(resource);
     }
 
     void Update()
@@ -62,12 +65,20 @@ public class BuildMode : MonoBehaviour
             return;
         }
 
-        // If enough Mana/Resources (check later)
+        // If enough Mana/Resources
+        int cost = 50;
+        if (resource >= cost)
+        {
+            resource -= cost;
+            UIManager.Instance.DrawBuildResource(resource);
+            // temp fix: + Vector3.up (use proper pivot point later on)
+            focusedTowerSpawn.TowerObject = Instantiate(towerPrefabs[selectedTowerIndex], focusedTowerSpawn.Position + Vector3.up, Quaternion.identity) as GameObject;
+            focusedTowerSpawn.Tower = focusedTowerSpawn.TowerObject.GetComponent<BaseTower>();
+            focusedTowerSpawn.IsOccupied = true;
 
-        // temp fix: + Vector3.up (use proper pivot point later on)
-        focusedTowerSpawn.TowerObject = Instantiate(towerPrefabs[selectedTowerIndex], focusedTowerSpawn.Position + Vector3.up, Quaternion.identity) as GameObject;
-        focusedTowerSpawn.Tower = focusedTowerSpawn.TowerObject.GetComponent<BaseTower>();
-        focusedTowerSpawn.IsOccupied = true;
+        }
+        else
+            UIManager.Instance.ShowGeneralMessage("Not enough build resources...", Color.red, 2f);
     }
 
     private void OnSelectionChanged()

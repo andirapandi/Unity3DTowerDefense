@@ -14,6 +14,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         waveInfoText = waveInfo.GetComponentsInChildren<Text>();
         recapInfoText = recapInfo.GetComponentsInChildren<Text>();
+        resourceInfoText = resourceInfo.GetComponentsInChildren<Text>();
         foreach (Transform t in root.transform) // var t does not work here?!!
         {
             allUI.Add(t.gameObject);
@@ -163,6 +164,21 @@ public class UIManager : MonoSingleton<UIManager>
                 go.SetActive(false);
             }
         }
+    }
+    #endregion
+
+    #region ResourceInformation
+    public GameObject resourceInfo;
+    Text[] resourceInfoText;
+
+    public void DrawBuildResource(int amount)
+    {
+        resourceInfoText[0].text = "Build resources : " + amount.ToString();
+    }
+
+    public void DrawHitpoint(int hitpoint, int maxHitpoint)
+    {
+        resourceInfoText[1].text = "Hitpoint : " + hitpoint.ToString() + "/" + maxHitpoint.ToString();
     }
     #endregion
 }

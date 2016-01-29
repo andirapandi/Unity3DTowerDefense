@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     #region Fields
-    int lifePoint = 10;
+    int hitPoint = maxHitpoint;
+    const int maxHitpoint = 10;
     int currentWave;
     /// <summary>
     /// total waves
@@ -34,6 +35,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         // Start called after Initialize
         UIManager.Instance.DrawWaveInfo();
+        UIManager.Instance.DrawHitpoint(hitPoint, maxHitpoint);
     }
 
     void Update()
@@ -91,8 +93,9 @@ public class LevelManager : MonoSingleton<LevelManager>
     #region Functions
     public void EnemyCrossed()
     {
-        lifePoint--;
-        if (lifePoint == 0)
+        hitPoint--;
+        UIManager.Instance.DrawHitpoint(hitPoint, maxHitpoint);
+        if (hitPoint == 0)
             Defeat();
     }
 
