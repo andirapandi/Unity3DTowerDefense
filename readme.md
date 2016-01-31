@@ -40,25 +40,25 @@ How to get started
 ----
 You can either use TortoiseGit (the Windows shell extension) or original GIT (for command line access).
 First of all, clone the project using
-'''
+```
 git clone https://github.com/andirapandi/Unity3DTowerDefense.git
-'''
+```
 
 You can then open any of the .unity files, main fie is gym.unity. Unity will the automatically recognize the project folder.
 
 You can view the commits via
-'''
+```
 git log
-'''
+```
 or
-'''
+```
 git log --online
-'''
+```
 
 then select a commit you want to use as a basis for your work, and make it active via e. g.
-'''
+```
 git checkout b804f96c45c7b8e187692d9b26540f8ed81156a4
-'''
+```
 
 Also check out the [article at Atlassian](https://git-scm.com/book/tr/v2/Git-Basics-Viewing-the-Commit-History) on using old commits.
 
