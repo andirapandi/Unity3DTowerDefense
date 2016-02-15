@@ -43,8 +43,8 @@ public static class InputManager
         if (Input.GetAxis("j_Secondary_Y") != 0)
             return Input.GetAxis("j_Secondary_Y");
 
-        if (Input.GetAxis("j_Secondary_X") != 0)
-            return Input.GetAxis("j_Secondary_X");
+        if (Input.GetAxis("k_Secondary_Y") != 0)
+            return Input.GetAxis("k_Secondary_Y");
 
         if (Input.GetMouseButton(1))
             if (Input.GetAxis("Vertical2") != 0)
