@@ -27,7 +27,7 @@ public class WalkingState : BaseState
         if (!motor.Grounded())
             motor.ChangeState("FallingState");
 
-        if (Input.GetButton("Jump"))
+        if (InputManager.ActionButton())
             motor.ChangeState("JumpingState");
     }
 }

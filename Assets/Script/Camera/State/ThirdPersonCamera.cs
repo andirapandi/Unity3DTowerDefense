@@ -32,11 +32,11 @@ public class ThirdPersonCamera : BaseCameraState
 
     public override Vector3 ProcessMotion(Vector3 input)
     {
-        if (Input.GetMouseButton(1))
-        {
+        //if (Input.GetMouseButton(1))
+        //{
             currentX += input.x * sensitivityX;
             currentY += input.z * sensitivityY;
-        }
+        //}
 
         // Clamp my CurrentY
         currentY = ClampAngle(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
