@@ -149,7 +149,7 @@ public class BuildMode : MonoBehaviour
     private void PoolInput()
     {
         // Activate / Deactivate Build Mode
-        if (Input.GetKeyDown(KeyCode.R))
+        if (InputManager.AbilityButton())
         {
             if (isActive)
                 DisableBuildMode();
@@ -159,7 +159,7 @@ public class BuildMode : MonoBehaviour
         // Change Tower Selection
         if (isActive)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (InputManager.MinusButton())
             {
                 if (selectedTowerIndex > 0)
                 {
@@ -167,7 +167,7 @@ public class BuildMode : MonoBehaviour
                     OnSelectionChanged();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (InputManager.PlusButton())
             {
                 if (selectedTowerIndex < towerPrefabs.Count - 1)
                 {
@@ -179,7 +179,7 @@ public class BuildMode : MonoBehaviour
         // Spawn the tower
         if (isActive)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (InputManager.InteractButton())
             {
                 SpawnTower();
             }

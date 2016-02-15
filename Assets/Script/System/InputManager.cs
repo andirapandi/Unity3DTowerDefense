@@ -6,9 +6,11 @@ public static class InputManager
     #region Axis
     public static float MainHorizontal()
     {
+        // joystick ad (+ws)
         if (Input.GetAxis("j_Main_X") != 0)
             return Input.GetAxis("j_Main_X");
 
+        // keyboard 1st axis stick
         if (Input.GetAxis("k_Main_X") != 0)
             return Input.GetAxis("k_Main_X");
 
@@ -25,12 +27,15 @@ public static class InputManager
 
     public static float SecondaryHorizontal()
     {
+        // joystick 2nd axis stick
         if (Input.GetAxis("j_Secondary_X") != 0)
             return Input.GetAxis("j_Secondary_X");
 
+        // keyboard arrow keys
         if (Input.GetAxis("k_Secondary_X") != 0)
             return Input.GetAxis("k_Secondary_X");
 
+        // mouse move when right mouse button is clicked
         if (Input.GetMouseButton(1))
             if (Input.GetAxis("Horizontal2") != 0)
                 return Input.GetAxis("Horizontal2");
@@ -74,6 +79,26 @@ public static class InputManager
     public static bool AbilityButton()
     {
         return (Input.GetButtonDown("j_Ability") || Input.GetButtonDown("k_Ability"));
+    }
+
+    public static bool PlusButton()
+    {
+        return (Input.GetButtonDown("j_Plus") || Input.GetButtonDown("k_Plus"));
+    }
+
+    public static bool MinusButton()
+    {
+        return (Input.GetButtonDown("j_Minus") || Input.GetButtonDown("k_Minus"));
+    }
+
+    public static bool BackButton()
+    {
+        return (Input.GetButtonDown("j_Back") || Input.GetButtonDown("k_Back"));
+    }
+
+    public static bool StartButton()
+    {
+        return (Input.GetButtonDown("j_Start") || Input.GetButtonDown("k_Start"));
     }
     #endregion
 }

@@ -42,7 +42,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         if (!waveActive)
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            if (InputManager.BackButton())
                 StartWave();
         }
         else

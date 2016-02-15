@@ -55,7 +55,7 @@ public class UIManager : MonoSingleton<UIManager>
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (InputManager.StartButton())
         {
             ToggleGameMenu();
         }

@@ -46,29 +46,4 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         return activeEnemies.Count;
     }
     #endregion
-
-    // Temporary
-    int lastLeft = -1;
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            Spawn(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            Spawn(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            Spawn(0, 1);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            Spawn(1, 1);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            Spawn(0, 2);
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-            Spawn(1, 2);
-
-        var left = GetEnemiesLeft();
-        if (left != lastLeft)
-        {
-            Debug.Log(GetEnemiesLeft());
-            lastLeft = left;
-        }
-    }
 }

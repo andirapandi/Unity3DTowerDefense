@@ -64,6 +64,10 @@ Also check out the [article at Atlassian](https://git-scm.com/book/tr/v2/Git-Bas
 
 (Note: using a visual tool like TortoiseGit or even the Git Gui will make this process a little easier.)
 
+Updates
+----
+Updated till video 40.
+
 License
 ----
 
